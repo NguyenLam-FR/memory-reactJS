@@ -1,9 +1,18 @@
+import { expect }  from 'chai'
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme'
 import App from './App';
+import GuessCount from './GuessCount';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('<App/>', () => {
+  it('renders without crashing', () => {
+    const wrapper = shallow(<App/>)
+    expect(wrapper).to.contain(<GuessCount guesses={0} />)
+  })
+
+  it('as 36 cards', () => {
+    const wrapper = shallow(<App/>)
+    expect(wrapper.find('Card')).to.have.length(36)
+   
+  })
+})
